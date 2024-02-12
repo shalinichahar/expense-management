@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import LocalManagement from "./LocalManagement";
 import Header from "./Header";
-import { Link } from "react-router-dom";
-import { Typography } from "@mui/material";
-import ExpenseChart from "./ExpenseChart";
+
+import NavBar from "./NavBar";
+import HighChart from "./HighChart";
+// import ExpenseChart from "./ExpenseChart";
 // import { toast } from "react-toastify";
 
 const Dashboard = ({ setAuth }) => {
@@ -24,67 +25,19 @@ const Dashboard = ({ setAuth }) => {
     }
   };
 
-  const logout = async (e) => {
-    e.preventDefault();
-    try {
-      localStorage.removeItem("token");
-      setAuth(false);
-      // toast.success("Logout successfully");
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
   useEffect(() => {
     getName();
   }, []);
-
 
   
 const AppLayout = () => {
     
   return(
       <>
-      <Header name={name} />
-      <button onClick={e => logout(e)} className="btn btn-primary">
-        Logout
-      </button>
-      <nav>
-        <ul style={{ listStyle: "none", padding: 0 }}>
-          <li>
-            <Typography variant="body1">
-              <Link
-                to="/link1"
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                  fontSize: "1.2rem",
-                  fontWeight: "bold",
-                }}
-              >
-                Dashboard
-              </Link>
-            </Typography>
-          </li>
-          <li>
-            <Typography variant="body1">
-              <Link
-                to="/link2"
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                  fontSize: "1.2rem",
-                  fontWeight: "bold",
-                }}
-              >
-                Expense Form
-              </Link>
-            </Typography>
-          </li>
-        </ul>
-      </nav>
-      <LocalManagement />
-    
+      <Header name={name} setAuth={setAuth} />
+      <NavBar/>
+      <LocalManagement name={name} />
+      {/* <HighChart/> */}
       {/* <HighchartsReact
 	      highcharts={Highcharts}
 	      options={options}
