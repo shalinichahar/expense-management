@@ -8,6 +8,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import Error from "./components/Error";
+import LocalManagement from "./components/LocalManagement";
+import HighChart from "./components/HighChart";
 
 // Function to check if user is authenticated
 
@@ -61,7 +63,16 @@ const App = () => {
             path: "/dashboard",
             element: isAuthenticated ? <Dashboard setAuth={setAuth }/> : <Navigate to="/login" />,
             errorElement: <Error/>
+          },
+          {
+            path: "/form",
+            element: isAuthenticated ? <LocalManagement /> : <Navigate to="/login" />
+          },
+          {
+            path: "/page",
+            element: isAuthenticated ? <HighChart /> : <Navigate to="/login" />
           }
+
         ]
       )} />
     </>
