@@ -64,14 +64,14 @@ const App = () => {
             element: isAuthenticated ? <Dashboard setAuth={setAuth }/> : <Navigate to="/login" />,
             errorElement: <Error/>
           },
-          {
-            path: "/form",
-            element: isAuthenticated ? <LocalManagement /> : <Navigate to="/login" />
-          },
-          {
-            path: "/page",
-            element: isAuthenticated ? <HighChart /> : <Navigate to="/login" />
-          }
+          // {
+          //   path: "/form",
+          //   element: isAuthenticated ? <LocalManagement /> : <Navigate to="/login" />
+          // },
+          // {
+          //   path: "/chart",
+          //   element: isAuthenticated ? <HighChart /> : <Navigate to="/login" />
+          // }
 
         ]
       )} />
