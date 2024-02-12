@@ -1,46 +1,53 @@
-import { Link } from "react-router-dom";
-import { Typography } from "@mui/material";
+import React from 'react';
+import { Typography, Button, Box } from '@mui/material';
 
-const NavBar = () => {
-    return (
-        <div>
-        <nav style={{ display: "flex", justifyContent: "center", marginTop:"10px"}}>
-  <ul style={{ listStyle: "none", padding: 0, display: "flex", gap: "40px" }}>
-    <li>
-      <Typography variant="body1">
-        <Link
-          to="/page"
-          style={{
-            textDecoration: "none",
-            color: "inherit",
-            fontSize: "1.2rem",
-            fontWeight: "bold",
-          }}
-        >
-          Dashboard
-        </Link>
-      </Typography>
-    </li>
-    <li>
-      <Typography variant="body1">
-        <Link
-          to="/form"
-          style={{
-            textDecoration: "none",
-            color: "inherit",
-            fontSize: "1.2rem",
-            fontWeight: "bold",
-          }}
-        >
-          Expense Form
-        </Link>
-      </Typography>
-    </li>
-  </ul>
-</nav>
-
-        </div>
-    )
-}
+const NavBar = ({ onScrollToSection, expenseTableRef, highChartRef }) => {
+  return (
+    <Box sx={{
+      display: 'flex',
+      justifyContent: 'flex-start',
+      p: 2,
+      mt: -3.5,
+      gap: 2, // Adjusts the space between navigation items
+      // backgroundColor: 'background.paper', // Use theme colors for consistency
+      // boxShadow: 3, // Adds subtle shadow for depth
+    }}>
+      <Button
+        variant="outlined" // Gives a more button-like appearance
+        size="small" // Makes the button smaller
+        onClick={() => onScrollToSection(expenseTableRef)}
+        sx={{
+          color: 'text.primary',
+          borderColor: 'primary.main',
+          ':hover': {
+            backgroundColor: 'primary.light',
+            color: 'primary.contrastText',
+          },
+          fontWeight: 'bold',
+          fontSize: '0.875rem', // Smaller font size
+        }}
+      >
+        Expense Form
+      </Button>
+      <Button
+        variant="outlined"
+        size="small"
+        onClick={() => onScrollToSection(highChartRef)}
+        sx={{
+          color: 'text.primary',
+          borderColor: 'primary.main',
+          ':hover': {
+            backgroundColor: 'primary.light',
+            color: 'primary.contrastText',
+          },
+          fontWeight: 'bold',
+          fontSize: '0.875rem',
+        }}
+      >
+        High Chart
+      </Button>
+    </Box>
+  );
+};
 
 export default NavBar;

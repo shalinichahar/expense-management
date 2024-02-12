@@ -1,32 +1,34 @@
-import LogoutButton from "./LogOutBtn";
+import React from 'react';
+import { AppBar, Toolbar, Typography, Grid, Box } from '@mui/material';
+import LogoutButton from './LogOutBtn';
 
-import React from "react";
-import { AppBar, Toolbar, Typography, Grid } from "@mui/material";
-
-const Header = ({ name }) => {
+const Header = ({ name, setAuth }) => {
   return (
-      <AppBar position="static" sx={{ width: "100%", height: "85px", margin: "0 auto" }}>
+    <AppBar position="static" sx={{
+      marginBottom: 4,
+      background: 'linear-gradient(45deg, #4CAF50 30%, #81C784 90%)', 
+    }}>
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-         Expense Tracker
-        </Typography>
-      </Toolbar>
-      {name && (
-        <Grid container justifyContent="space-between">
-          <Grid item xs={56}>
-            <Typography variant="body1" sx={{ marginLeft: "27px" }}>
-              Welcome {name}
+        <Grid container direction="column" justifyContent="center" alignItems="center">
+          <Grid item xs={12}>
+            <Typography variant="h4" component="div" sx={{ flexGrow: 1, textAlign: 'center', marginTop: '5px', fontFamily:"math"}}>
+            
+              Expense Tracker
             </Typography>
           </Grid>
-          <Grid item xs={6}>
-            {/* Empty Grid item to create space */}
-          </Grid>
-        </Grid>
+          {name && (
+            <Grid item xs={12}>
+              <Typography variant="h6" sx={{ textAlign: 'center' }}>
+                Welcome, {name}
+              </Typography>
+            </Grid>
           )}
-          
-        <LogoutButton/>
+        </Grid>
+      </Toolbar>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', paddingRight: 2 }}>
+        <LogoutButton setAuth={setAuth} />
+      </Box>
     </AppBar>
-      
   );
 };
 

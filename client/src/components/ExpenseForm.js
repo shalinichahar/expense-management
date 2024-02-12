@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Container, Typography, Grid, Select, MenuItem } from '@mui/material';
+import { TextField, Button, Container, Typography, Grid, Select, MenuItem , FormControl, InputLabel} from '@mui/material';
 import { jwtDecode } from 'jwt-decode';
+import { v4 as uuidv4 } from 'uuid'; 
 
-function ExpenseForm() {
+function ExpenseForm({editData}) {
   const [userId, setUserId] = useState("");
   const [formData, setFormData] = useState({
     date: '',
@@ -11,6 +12,12 @@ function ExpenseForm() {
     description: ''
   });
   const [userToken, setUserToken] = useState('');
+
+  useEffect(() => {
+    if (editData) {
+      setFormData(editData);
+    }
+  }, [editData]);
 
   // Effect to retrieve user token from local storage
   useEffect(() => {
@@ -46,7 +53,8 @@ function ExpenseForm() {
     }
 
     let expenseData = JSON.parse(localStorage.getItem('expenseData')) || [];
-    const formDataWithToken = { ...formData, token: userToken, decodedId: userId };
+    const id = uuidv4();
+    const formDataWithToken = { ...formData,id, token: userToken, decodedId: userId };
     expenseData.push(formDataWithToken);
     localStorage.setItem('expenseData', JSON.stringify(expenseData));
 
@@ -64,8 +72,13 @@ function ExpenseForm() {
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h4" gutterBottom>
-        Expense Tracker
+       <Typography variant="h4" gutterBottom sx={{
+          textAlign: 'center',
+          fontFamily: '"Roboto Condensed", sans-serif', 
+        fontWeight: 700,
+          marginBottom:"25px",
+        }} >
+        {editData ? 'Edit Expense' : 'Add Expense'}
       </Typography>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -77,7 +90,10 @@ function ExpenseForm() {
               name="date"
               value={formData.date}
               onChange={handleInputChange}
-              InputLabelProps={{ shrink: true }}
+              InputLabelProps={{
+                shrink: true
+              }}
+              // sx={input[type=date]: { color: 'lightgrey' }}}
             />
           </Grid>
           <Grid item xs={12}>
@@ -91,22 +107,25 @@ function ExpenseForm() {
             />
           </Grid>
           <Grid item xs={12}>
-            {/* Replace TextField with Select */}
+          <FormControl fullWidth>
+          <InputLabel>Category</InputLabel>
             <Select
               fullWidth
-              select
+              
               label="Category"
               name="category"
               value={formData.category}
               onChange={handleInputChange}
-             
+              defaultValue="Select Category"
             >
               
               <MenuItem value="income source">Income Source</MenuItem>
               <MenuItem value="fixed expense">Fixed Expense</MenuItem>
               <MenuItem value="variable expense">Variable Expense</MenuItem>
-            </Select>
+              </Select>
+              </FormControl>
           </Grid>
+         
           <Grid item xs={12}>
             <TextField
               fullWidth
@@ -117,8 +136,9 @@ function ExpenseForm() {
             />
           </Grid>
         </Grid>
-        <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
-          Submit
+        <Button type="submit" variant="text" sx={{ backgroundColor: '#1e453e' }} style={{ marginTop: '20px', width:'100px', height:'45px', }}>
+
+        {editData ? 'Update' : 'Submit'}
         </Button>
       </form>
     </Container>

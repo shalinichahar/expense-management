@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { TextField, Button, Typography, Container, Link as MuiLink } from "@mui/material";
+import { TextField, Button, Typography, Container, Link as MuiLink, Box } from "@mui/material";
 // import { toast } from "react-toastify";
 
 const Register = ({setAuth}) => {
@@ -46,58 +46,81 @@ const Register = ({setAuth}) => {
   };
 
   return (
-    <Container style={{ marginTop: "5rem" }}>
-      <Typography variant="h5" align="center">
-        Register
-      </Typography>
-      <form style={{ width: "100%", marginTop: "1rem" }} onSubmit={onSubmit}>
-        <TextField
-          type="email"
-          name="email"
-          label="Email"
-          value={email}
-          onChange={onChange}
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          required
-        />
-        <TextField
-          type="password"
-          name="password"
-          label="Password"
-          value={password}
-          onChange={onChange}
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          required
-        />
-        <TextField
-          type="text"
-          name="name"
-          label="Name"
-          value={name}
-          onChange={onChange}
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          required
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          style={{ margin: "3rem 0 2rem" }}
+    <Box
+      sx={{
+        backgroundImage: 'url("https://c0.wallpaperflare.com/preview/753/601/103/black-green-leaves-plants.jpg")',
+        backgroundSize: 'cover',
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white'
+      }}
+    >
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            padding: 4,
+            borderRadius: 1
+          }}
         >
-          Submit
-        </Button>
-      </form>
-      <MuiLink component={Link} to="/login" variant="body2">
-        Already have an account? Sign in
-      </MuiLink>
-    </Container>
+          <Typography component="h1" variant="h5" gutterBottom>
+            Sign Up
+          </Typography>
+          <form onSubmit={onSubmit} style={{ width: '100%', marginTop: '1rem' }}>
+            <TextField
+              type="text"
+              name="name"
+              label="Name"
+              value={name}
+              onChange={onChange}
+              margin="normal"
+              required
+              fullWidth
+              sx={{ input: { color: 'white' }, label: { color: 'white' }, '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'grey.500' } } }}
+            />
+            <TextField
+              type="email"
+              name="email"
+              label="Email"
+              value={email}
+              onChange={onChange}
+              margin="normal"
+              required
+              fullWidth
+              sx={{ input: { color: 'white' }, label: { color: 'white' }, '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'grey.500' } } }}
+            />
+            <TextField
+              type="password"
+              name="password"
+              label="Password"
+              value={password}
+              onChange={onChange}
+              margin="normal"
+              required
+              fullWidth
+              sx={{ input: { color: 'white' }, label: { color: 'white' }, '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'grey.500' } } }}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, bgcolor: 'green' }}
+            >
+              Register
+            </Button>
+          </form>
+          <Link to="/login" style={{ color: 'white', textDecoration: 'none', marginTop: '1rem' }}>
+            Already have an account? Sign in
+          </Link>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 

@@ -23,8 +23,16 @@ const LogoutButton = ({ setAuth }) => {
     <Button
       onClick={logout}
       variant="contained"
-      color="primary"
-      style={buttonStyle}
+      sx={{
+        position: 'absolute',
+        top: 16,
+        right: 20,
+        background: 'linear-gradient(45deg, #66bb6a 30%, #43a047 90%)', // Light-dark green gradient
+        color: 'white',
+        '&:hover': {
+          background: 'linear-gradient(45deg, #57a05a 30%, #2e7031 90%)', // Darker green gradient on hover
+        },
+      }}
     >
       Logout
     </Button>

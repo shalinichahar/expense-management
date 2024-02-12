@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { Link} from "react-router-dom";
-import { TextField, Button, Typography, Container, Grid, Link as MuiLink } from "@mui/material";
-// import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { TextField, Button, Typography, Container, Grid, Link as MuiLink, Box } from "@mui/material";
 
 const Login = ({ setAuth }) => {
-
   const [inputs, setInputs] = useState({
     email: "",
     password: ""
@@ -32,74 +30,94 @@ const Login = ({ setAuth }) => {
 
       const parseRes = await response.json();
 
-      console.log(parseRes.token);
-
       if (parseRes.token) {
-        console.log("hey")
         localStorage.setItem("token", parseRes.token);
         setAuth(true);
-        // toast.success("Logged in Successfully");
       }
       else {
         setAuth(false)
       }
-       
-        
     } catch (err) {
       console.error(err.message);
     }
   };
 
   return (
-    <Container style={{ marginTop: "5rem" }}>
-      <Typography variant="h5" align="center">
-        Login
-      </Typography>
-      <form style={{ width: "100%", marginTop: "1rem" }} onSubmit={onSubmitForm}>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email"
-          name="email"
-          autoComplete="email"
-          autoFocus
-          value={email}
-          onChange={onChange}
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-          value={password}
-          onChange={onChange}
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          style={{ margin: "3rem 0 2rem" }}
+    <Box
+      sx={{
+        backgroundImage: 'url("https://c0.wallpaperflare.com/preview/753/601/103/black-green-leaves-plants.jpg")',
+        backgroundSize: 'cover',
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white'
+      }}
+    >
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            padding: 4,
+            borderRadius: 1
+          }}
         >
-          Sign In
-        </Button>
-      </form>
-      <Grid container justifyContent="flex-end">
-        <Grid item>
-          <MuiLink component={Link} to="/register" variant="body2">
-            {"Don't have an account? Sign Up"}
-          </MuiLink>
-        </Grid>
-      </Grid>
-    </Container>
+          <Typography component="h1" variant="h5" gutterBottom>
+            Let's Get Started
+          </Typography>
+          <Typography variant="body2" align="center" gutterBottom>
+            Create your account
+          </Typography>
+          <Box component="form" onSubmit={onSubmitForm} sx={{ mt: 1 }}>          
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Your Email"
+              name="email"
+              autoComplete="email"
+              value={email}
+              onChange={onChange}
+              sx={{ input: { color: 'white' }, label: { color: 'white' } }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="new-password"
+              value={password}
+              onChange={onChange}
+              sx={{ input: { color: 'white' }, label: { color: 'white' } }}
+            />
+            
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, bgcolor: 'green' }}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="center">
+              <Grid item>
+                <Link to="/register" variant="body2" style={{ color: 'white', textDecoration: 'none' }}>
+                Don't have an account? Sign Up
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 

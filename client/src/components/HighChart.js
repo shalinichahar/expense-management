@@ -56,7 +56,7 @@ const HighChart = () => {
   };
 
   return (
-    <div>
+    <div id='highChart'>
       <HighchartsReact highcharts={Highcharts} options={options} />
     </div>
   );
