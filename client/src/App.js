@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom';
-// import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Components
@@ -64,15 +63,6 @@ const App = () => {
             element: isAuthenticated ? <Dashboard setAuth={setAuth }/> : <Navigate to="/login" />,
             errorElement: <Error/>
           },
-          // {
-          //   path: "/form",
-          //   element: isAuthenticated ? <LocalManagement /> : <Navigate to="/login" />
-          // },
-          // {
-          //   path: "/chart",
-          //   element: isAuthenticated ? <HighChart /> : <Navigate to="/login" />
-          // }
-
         ]
       )} />
     </>

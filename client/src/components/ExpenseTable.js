@@ -1,5 +1,5 @@
 import React, { useState,useEffect }  from 'react';
-import { Typography, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper, IconButton, TablePagination, Box , useTheme, Card} from '@mui/material';
+import { Typography, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper, IconButton, TablePagination, Box , useTheme, Modal, TextField, Button} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { jwtDecode } from 'jwt-decode';
@@ -10,19 +10,14 @@ function ExpenseTable({ expenseData, onDeleteExpense, onUpdateExpense, onEditExp
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const theme = useTheme();
 
-
-  console.log(expenseData)
-  // Retrieve token from local storage
-  // const userToken = (localStorage.getItem('token'));
   const [userExpenses, setUserExpenses] = useState([])
   const [userToken, setUserToken] = useState('');
 
-  // Effect to retrieve user token from local storage
+ 
   useEffect(() => {
     const token = localStorage.getItem('token');
     const decodedToken = jwtDecode(token);
     setUserToken(decodedToken);
-    console.log(userToken)
   }, []);
 
   useEffect(() => {
@@ -30,21 +25,9 @@ function ExpenseTable({ expenseData, onDeleteExpense, onUpdateExpense, onEditExp
       return expense.decodedId === userToken.user 
     });
     setUserExpenses(data);
-    // console.log(userExpenses)
   }, [expenseData, userToken])
 
-  // console.log(userToken.user)
-  // const expenseData = JSON.parse(localStorage.getItem('expenseData')) || [];
-//  console.log(expenseData[6].token === userToken)
-  // console.log(typeof (expenseData[4].token))
-  // console.log((expenseData[4].token) , userToken)
-  // Filter expense data based on the user's token
-  // const userExpenses = expenseData.filter((expense, i) => {
-  //   return expense.token === userToken
-  // });
-  console.log(userExpenses)
   const handleDelete = (id) => {
-    console.log(id)
     onDeleteExpense(id);
   };
 
@@ -61,6 +44,7 @@ function ExpenseTable({ expenseData, onDeleteExpense, onUpdateExpense, onEditExp
     const expense = expenseData.find(expense => expense.id === id);
     onEditExpense(expense.id);
   };
+  
 
   return (
     <div>
@@ -81,7 +65,7 @@ function ExpenseTable({ expenseData, onDeleteExpense, onUpdateExpense, onEditExp
               </TableRow>
             </TableHead>
             <TableBody>
-              {(rowsPerPage > 4 ? userExpenses.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : userExpenses)
+              {(rowsPerPage > 4 ? userExpenses.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : userExpenses) 
               .map((expense, index) => (
                 <TableRow key={index} hover sx={{
                   '&:nth-of-type(odd)': {
@@ -100,6 +84,8 @@ function ExpenseTable({ expenseData, onDeleteExpense, onUpdateExpense, onEditExp
                     <IconButton aria-label="edit" onClick={() => handleEdit(expense.id)}>
                       <EditIcon />
                     </IconButton>
+                    
+
                     <IconButton aria-label="delete" onClick={() => handleDelete(expense.id)}>
                       <DeleteIcon />
                     </IconButton>
@@ -128,29 +114,25 @@ function ExpenseTable({ expenseData, onDeleteExpense, onUpdateExpense, onEditExp
                   color: '#f1f8e9',
                   marginTop: '10px',
                   marginRight:'20px',
-                  lineHeight: 'inherit', // Ensures text aligns properly without altering line height
+                  lineHeight: 'inherit', 
                 },
                 '.MuiTablePagination-selectRoot, .MuiTablePagination-input': {
                   color: '#f1f8e9',
                   border: '1px solid #f1f8e9',
                   borderRadius: '4px',
-                  padding: '4px 24px 4px 8px', // Adjusted padding to ensure consistent height
+                  padding: '4px 24px 4px 8px', 
                   marginRight: '25px',
-                   // Match line height with other elements
                 },
                 '.MuiTablePagination-actions': {
                   color: '#f1f8e9',
                   
-                  marginLeft: '8px', // Ensures spacing between elements
+                  marginLeft: '8px', 
                   '.MuiIconButton-root': {
-                    padding: '8px', // Standardizes padding to ensure alignment
+                    padding: '8px', 
                   },
                 },
               }}
             />
-
-              
-
         </TableContainer>
         
       ) : (

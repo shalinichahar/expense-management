@@ -1,38 +1,25 @@
 import React from 'react';
 import { Typography, Button, Box } from '@mui/material';
 
-const NavBar = ({ onScrollToSection, expenseTableRef, highChartRef }) => {
+const NavBar = ({ onScrollToSection }) => {
+  const scrollToTable = () => {
+    // console.log('hey')
+    onScrollToSection(); // Call the onScrollToSection function passed from the parent component
+  };
   return (
     <Box sx={{
       display: 'flex',
       justifyContent: 'flex-start',
       p: 2,
       mt: -3.5,
-      gap: 2, // Adjusts the space between navigation items
-      // backgroundColor: 'background.paper', // Use theme colors for consistency
-      // boxShadow: 3, // Adds subtle shadow for depth
+      gap: 2,
     }}>
-      <Button
-        variant="outlined" // Gives a more button-like appearance
-        size="small" // Makes the button smaller
-        onClick={() => onScrollToSection(expenseTableRef)}
-        sx={{
-          color: 'text.primary',
-          borderColor: 'primary.main',
-          ':hover': {
-            backgroundColor: 'primary.light',
-            color: 'primary.contrastText',
-          },
-          fontWeight: 'bold',
-          fontSize: '0.875rem', // Smaller font size
-        }}
-      >
-        Expense Form
-      </Button>
+    
+      {/* Add a new button for scrolling to the Table component */}
       <Button
         variant="outlined"
         size="small"
-        onClick={() => onScrollToSection(highChartRef)}
+        onClick={scrollToTable}
         sx={{
           color: 'text.primary',
           borderColor: 'primary.main',
@@ -44,7 +31,7 @@ const NavBar = ({ onScrollToSection, expenseTableRef, highChartRef }) => {
           fontSize: '0.875rem',
         }}
       >
-        High Chart
+        Data Table
       </Button>
     </Box>
   );

@@ -1,31 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
 import LocalManagement from "./LocalManagement";
 import Header from "./Header";
-
 import NavBar from "./NavBar";
 import HighChart from "./HighChart";
 import { theme } from "../helper/Theme";
-import { ThemeProvider } from '@mui/material/styles';
-
-// import ExpenseChart from "./ExpenseChart";
-// import { toast } from "react-toastify";
-
+import { ThemeProvider, Grid } from '@mui/material'; 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
-  const localManagementRef = useRef(null);
-  const highChartRef = useRef(null);
-
-  // const [scrollToSection, setScrollToSection] = useState('');
 
   const getName = async () => {
     try {
-      const res = await fetch("http://localhost:5000/dashboard/", {
+      const response = await fetch("http://localhost:5000/dashboard/", {
         method: "GET",
-        headers: { token: localStorage.token }
+        headers: { token: localStorage.token },
       });
-
-      const parseData = await res.json();
-      console.log(parseData.user_name);
+      const parseData = await response.json();
       setName(parseData.user_name);
     } catch (err) {
       console.error(err.message);
@@ -36,40 +25,28 @@ const Dashboard = ({ setAuth }) => {
     getName();
   }, []);
 
-
-  const handleScrollToSection = (sectionRef) => {
-    if (sectionRef && sectionRef.current) {
-      sectionRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-
-  
-const AppLayout = () => {
-    
-  return(
-      <ThemeProvider theme={theme}>
-      <div>
-        <Header name={name} setAuth={setAuth} />
-        <NavBar onScrollToSection={handleScrollToSection} localManagementRef={localManagementRef} highChartRef={highChartRef} />
-        <div ref={localManagementRef}>
-          <LocalManagement name={name} />
-        </div>
-        <div ref={highChartRef}>
-          <HighChart />
-        </div>
-      </div>
-    </ThemeProvider>  
-  );
-};
-  
-
   return (
     <ThemeProvider theme={theme}>
-    <div>
-      <AppLayout />
-    </div>
-  </ThemeProvider>
+      <div>
+        <Header name={name} setAuth={setAuth} />
+        <Grid container spacing={3} style={{ marginTop: '20px', padding: '0 20px' }}>
+          <Grid item xs={12} md={6}>
+            <div>
+              <LocalManagement name={name} displayTable={false} displayForm={true}  />
+            </div>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <HighChart />
+          </Grid>
+        
+          <Grid item xs={12}>
+            <div>
+              <LocalManagement name={name} displayTable={true} displayForm={false} />
+            </div>
+          </Grid>
+        </Grid>
+      </div>
+    </ThemeProvider>
   );
 };
 

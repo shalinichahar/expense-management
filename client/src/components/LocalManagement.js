@@ -1,26 +1,23 @@
-// LocalManagement.js (Parent Component)
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ExpenseForm from './ExpenseForm';
 import ExpenseTable from './ExpenseTable';
 import { jwtDecode } from 'jwt-decode';
 import { v4 as uuidv4 } from 'uuid';
 
-const LocalManagement = ({ name }) => {
+const LocalManagement = ({ name, displayTable, displayForm }) => {
   
-    const [expenseData, setExpenseData] = useState([]);
-    const [editData, setEditData] = useState(null);
+  const [expenseData, setExpenseData] = useState([]);
+  const [editData, setEditData] = useState(null);
 
   const [userId, setUserId] = useState("");
+  const tableRef = useRef(null);
 
   useEffect(() => {
-    // Retrieve user token from local storage
-      const userToken = localStorage.getItem('token');
-      console.log(userToken)
+    
+    const userToken = localStorage.getItem('token');
+   
     if (userToken) {
-      // Decode the token to access its payload
-        const decodedToken = jwtDecode(userToken);
-        // console.log(decodedToken.user)
-      // Extract userId from the decoded token
+      const decodedToken = jwtDecode(userToken);
       const userIdFromToken = decodedToken.user;
       setUserId(userIdFromToken);
     }
@@ -31,31 +28,24 @@ const LocalManagement = ({ name }) => {
     // Fetch expense data from local storage and update state
     const storedData = JSON.parse(localStorage.getItem('expenseData')) || [];
     setExpenseData(storedData);
-  }, []); 
-
+  }, []);
+  
   const addExpense = (newExpense) => {
-    // Add new expense to state and local storage
-    setExpenseData(prevData => [...prevData, newExpense]);
-    localStorage.setItem('expenseData', JSON.stringify([...expenseData, newExpense]));
+    const newExpensesArray = [...expenseData, { ...newExpense, id: uuidv4() }];
+    setExpenseData(newExpensesArray);
+    localStorage.setItem('expenseData', JSON.stringify(newExpensesArray));
   };
 
   const deleteExpense = (uuid) => {
-    console.log(uuid)
-    // console.log(expenseData)
-    // Delete expense from state and local storage
     const updatedData = expenseData.filter(expense => expense.id !== uuid);
-    // console.log(updatedData)
     setExpenseData(updatedData);
     localStorage.setItem('expenseData', JSON.stringify(updatedData));
   };
 
   const updateExpense = (updatedExpense) => {
-    const updatedData = expenseData.map(expense => {
-      if (expense.id === updatedExpense.id) {
-        return updatedExpense;
-      }
-      return expense;
-    });
+    const updatedData = expenseData.map(expense =>
+      expense.id === updatedExpense.id ? updatedExpense : expense
+    );
     setExpenseData(updatedData);
     localStorage.setItem('expenseData', JSON.stringify(updatedData));
     setEditData(null); // Clear edit data after updating
@@ -65,13 +55,18 @@ const LocalManagement = ({ name }) => {
     const expenseToEdit = expenseData.find(expense => expense.id === expenseId);
     setEditData(expenseToEdit);
   };
-
-  return (
-    <div>
-      <ExpenseForm onSubmit={addExpense} editData={editData}/>
-      <ExpenseTable  expenseData={expenseData} onDeleteExpense={deleteExpense} onUpdateExpense={updateExpense}  onEditExpense={editExpense} name={name} />
-    </div>
-  );
-};
+  
+    return (
+      <>
+        {displayForm && <ExpenseForm onSubmit={addExpense} editData={editData} onUpdateExpense={updateExpense} onAddExpense={addExpense} />}
+        {!displayForm && editData && <div>
+          <ExpenseForm onSubmit={addExpense} editData={editData} onUpdateExpense={updateExpense} onAddExpense={addExpense} />
+        </div>}
+        {displayTable && <div>
+          <ExpenseTable expenseData={expenseData} onDeleteExpense={deleteExpense} onUpdateExpense={updateExpense} onEditExpense={editExpense} name={name} />
+        </div>}
+      </>
+    );
+}
 
 export default LocalManagement;

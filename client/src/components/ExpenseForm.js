@@ -3,7 +3,8 @@ import { TextField, Button, Container, Typography, Grid, Select, MenuItem , Form
 import { jwtDecode } from 'jwt-decode';
 import { v4 as uuidv4 } from 'uuid'; 
 
-function ExpenseForm({editData}) {
+function ExpenseForm({ editData, onUpdateExpense, onAddExpense }) {
+  console.log(editData)
   const [userId, setUserId] = useState("");
   const [formData, setFormData] = useState({
     date: '',
@@ -14,26 +15,22 @@ function ExpenseForm({editData}) {
   const [userToken, setUserToken] = useState('');
 
   useEffect(() => {
+    console.log(editData)
     if (editData) {
+      console.log(editData)
       setFormData(editData);
     }
   }, [editData]);
-
-  // Effect to retrieve user token from local storage
+  
   useEffect(() => {
     const token = localStorage.getItem('token');
     setUserToken(token);
   }, []);
 
   useEffect(() => {
-    // Retrieve user token from local storage
-      const userToken = localStorage.getItem('token');
-      console.log(userToken)
+     const userToken = localStorage.getItem('token');
     if (userToken) {
-      // Decode the token to access its payload
-        const decodedToken = jwtDecode(userToken);
-        // console.log(decodedToken.user)
-      // Extract userId from the decoded token
+      const decodedToken = jwtDecode(userToken);
       const userIdFromToken = decodedToken.user;
       setUserId(userIdFromToken);
     }
@@ -52,14 +49,13 @@ function ExpenseForm({editData}) {
       return;
     }
 
-    let expenseData = JSON.parse(localStorage.getItem('expenseData')) || [];
-    const id = uuidv4();
-    const formDataWithToken = { ...formData,id, token: userToken, decodedId: userId };
-    expenseData.push(formDataWithToken);
-    localStorage.setItem('expenseData', JSON.stringify(expenseData));
-
-    // Optionally, you can display a success message or perform other actions here
-    console.log('Form data submitted and stored for the user.');
+    if (editData) {
+      onUpdateExpense({ ...formData, id: editData.id, token: userToken, decodedId: userId }); // Assuming onUpdateExpense is passed as prop
+    } else {
+      const newExpense = { ...formData, id: uuidv4(), token: userToken, decodedId: userId };
+    onAddExpense(newExpense);  
+    }
+    setFormData({ date: '', amount: '', category: '', description: '' });
   };
 
   const handleInputChange = (event) => {
@@ -70,6 +66,21 @@ function ExpenseForm({editData}) {
     }));
   };
 
+  //CATEGORIES
+ 
+    const [categories, setCategories] = useState([
+      'Income Source',
+      'Fixed Expense',
+      'Variable Expense',
+    ]);
+
+    const handleAddCategory = () => {
+      const newCategory = prompt('Enter a new category:');
+      if (newCategory) {
+        setCategories([...categories, newCategory]);
+      }
+    };
+  
   return (
     <Container maxWidth="sm">
        <Typography variant="h4" gutterBottom sx={{
@@ -93,7 +104,6 @@ function ExpenseForm({editData}) {
               InputLabelProps={{
                 shrink: true
               }}
-              // sx={input[type=date]: { color: 'lightgrey' }}}
             />
           </Grid>
           <Grid item xs={12}>
@@ -109,20 +119,21 @@ function ExpenseForm({editData}) {
           <Grid item xs={12}>
           <FormControl fullWidth>
           <InputLabel>Category</InputLabel>
-            <Select
-              fullWidth
-              
-              label="Category"
-              name="category"
-              value={formData.category}
-              onChange={handleInputChange}
-              defaultValue="Select Category"
-            >
-              
-              <MenuItem value="income source">Income Source</MenuItem>
-              <MenuItem value="fixed expense">Fixed Expense</MenuItem>
-              <MenuItem value="variable expense">Variable Expense</MenuItem>
-              </Select>
+          <Select
+          fullWidth
+          label="Category"
+          name="category"
+          value={formData.category}
+          onChange={handleInputChange}
+          defaultValue="Select Category"
+        >
+          {categories.map((category, index) => (
+            <MenuItem key={index} value={category}>
+              {category}
+            </MenuItem>
+          ))}
+        </Select>
+        <Button onClick={handleAddCategory}>Add Category</Button>
               </FormControl>
           </Grid>
          
