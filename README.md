@@ -27,6 +27,13 @@ This application consists of PostgreSQL, Express, React and Node.js. Developed a
 - **Technologies Used**: React.js for the frontend, Node.js with Express for the backend, PostgreSQL for database management, JWT for authentication, and Highcharts for data visualization.
 - **Security Features**: Includes secure handling of user authentication with JSON Web Tokens (JWT) and hashed passwords to protect user information.
 
+
+<img width="937" alt="image" src="https://github.com/shalinichahar/expense-management/assets/70834279/967219da-02b9-4f17-ad64-fa114d0e2d74">
+<img width="941" alt="image" src="https://github.com/shalinichahar/expense-management/assets/70834279/26165ef4-45bd-4d17-9200-f388ac3a74ab">
+<img width="955" alt="image" src="https://github.com/shalinichahar/expense-management/assets/70834279/4d94c1d8-ed4e-4fa4-ae86-049e9473db2b">
+<img width="928" alt="image" src="https://github.com/shalinichahar/expense-management/assets/70834279/1599b6a5-f908-4d6d-b138-d001126c7343">
+
+
 # Why use PostgreSQL?
 
 - Free and open source.
