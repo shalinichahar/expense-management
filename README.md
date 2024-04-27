@@ -8,24 +8,24 @@ This application consists of PostgreSQL, Express, React and Node.js. Developed a
   
 # Features of the Expense Management System
 ### 1. Login and Registration with Validation 
-**User Authentication**: The process of checking if you really are the person you claim to be, done by using JWT in backend.
-**User Authoriztion**: The process of checking of depending on your status/credentials , what you are allowed to do.
-**Form Validation**: Both the login and registration forms include client-side and server-side validation to check the correctness of input data, such as email format and mandatory fields, enhancing the application's reliability and user experience.
+- **User Authentication**: The process of checking if you really are the person you claim to be, done by using JWT in backend.
+- **User Authoriztion**: The process of checking of depending on your status/credentials , what you are allowed to do.
+- **Form Validation**: Both the login and registration forms include client-side and server-side validation to check the correctness of input data, such as email format and mandatory fields, enhancing the application's reliability and user experience.
 ### 2. Expense Form
-**Data Entry**: Users can input details about their expenses through a user-friendly form interface. This form allows the entry of essential expense attributes such as date, amount, category, and a description.
-**Validation**: The expense form validates inputs to ensure data integrity, such as checking for valid numerical inputs for the amount and non-empty strings for required fields.
+- **Data Entry**: Users can input details about their expenses through a user-friendly form interface. This form allows the entry of essential expense attributes such as date, amount, category, and a description.
+- **Validation**: The expense form validates inputs to ensure data integrity, such as checking for valid numerical inputs for the amount and non-empty strings for required fields.
 ### 3. Expense Table with CRUD Operations
-**View Expenses**: Users can view a list of entered expenses in a tabular format, which includes all details such as date, amount, category, and description.
-**Update and Delete**: Each entry in the expense table includes options to edit or delete the expense, allowing for easy management of expense records.
-**Pagination and Sorting**: The table supports pagination and sorting to help users easily navigate and organize their expense data, making the interface scalable for a large number of entries.
+- **View Expenses**: Users can view a list of entered expenses in a tabular format, which includes all details such as date, amount, category, and description.
+- **Update and Delete**: Each entry in the expense table includes options to edit or delete the expense, allowing for easy management of expense records.
+- **Pagination and Sorting**: The table supports pagination and sorting to help users easily navigate and organize their expense data, making the interface scalable for a large number of entries.
 ### 4. Highcharts Integration
-**Data Visualization**: Integrates JS Highcharts Library to provide a graphical representation of expenses. This feature allows users to visualize their spending patterns over time and by category through dynamic pie charts.
-**Interactive Charts**: Users can interact with the chart to get a more detailed view of each category's expenses, helping them understand their spending habits better.
+- **Data Visualization**: Integrates JS Highcharts Library to provide a graphical representation of expenses. This feature allows users to visualize their spending patterns over time and by category through dynamic pie charts.
+- **Interactive Charts**: Users can interact with the chart to get a more detailed view of each category's expenses, helping them understand their spending habits better.
 ### 5. Responsive Design
-**Mobile-Friendly Interface**: The application is designed to be responsive, providing an optimal viewing experience across a wide range of devices, from desktops to mobile phones.
+- **Mobile-Friendly Interface**: The application is designed to be responsive, providing an optimal viewing experience across a wide range of devices, from desktops to mobile phones.
 ### Additional Information
-**Technologies Used**: React.js for the frontend, Node.js with Express for the backend, PostgreSQL for database management, JWT for authentication, and Highcharts for data visualization.
-**Security Features**: Includes secure handling of user authentication with JSON Web Tokens (JWT) and hashed passwords to protect user information.
+- **Technologies Used**: React.js for the frontend, Node.js with Express for the backend, PostgreSQL for database management, JWT for authentication, and Highcharts for data visualization.
+- **Security Features**: Includes secure handling of user authentication with JSON Web Tokens (JWT) and hashed passwords to protect user information.
 
 # Why use PostgreSQL?
 
