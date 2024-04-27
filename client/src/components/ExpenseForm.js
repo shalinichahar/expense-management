@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import { v4 as uuidv4 } from 'uuid'; 
 
 function ExpenseForm({ editData, onUpdateExpense, onAddExpense }) {
-  console.log(editData)
+  // console.log(editData)
   const [userId, setUserId] = useState("");
   const [formData, setFormData] = useState({
     date: '',
@@ -37,7 +37,7 @@ function ExpenseForm({ editData, onUpdateExpense, onAddExpense }) {
   }, []);
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
 
     if (!formData.date || !formData.amount || !formData.category || !formData.description) {
       alert('Please fill out all fields.');
@@ -83,7 +83,7 @@ function ExpenseForm({ editData, onUpdateExpense, onAddExpense }) {
   
   return (
     <Container maxWidth="sm">
-       <Typography variant="h4" gutterBottom sx={{
+       <Typography variant="h5" gutterBottom sx={{
           textAlign: 'center',
           fontFamily: '"Roboto Condensed", sans-serif', 
         fontWeight: 700,
