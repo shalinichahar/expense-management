@@ -21,7 +21,6 @@ module.exports = async (req, res, next) => {
     req.user = payload.user;
     next();
   } catch (err) {
-    console.error(err.message)
     res.status(40).json({ msg: "Not Authorized (token invalid)" });
   }
 };
