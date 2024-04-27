@@ -2,9 +2,9 @@
 This application consists of PostgreSQL, Express, React and Node.js. Developed a full-stack web application with CRUD operations.
 
 # Getting Started
-*npm start- for frontend
-*nodemon server.js for backend
-*login with email: pop@gmail.com , password: pop for better UI experience.
+-- npm start- for frontend
+-- nodemon server.js for backend
+-- login with email: pop@gmail.com , password: pop for better UI experience.
 
 # Why use PostgreSQL?
 
