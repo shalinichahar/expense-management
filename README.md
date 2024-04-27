@@ -1,14 +1,10 @@
 # expense-management
+This application consists of PostgreSQL, Express, React and Node.js. Developed a full-stack web application with CRUD operations.
 
-*npm start- for front-end
-
+# Getting Started
+*npm start- for frontend
 *nodemon server.js for backend
-
-*login with- 
-
-email: pop@gmail.com
-
-password: pop
+*login with email: pop@gmail.com , password: pop for better UI experience.
 
 # Why use PostgreSQL?
 
