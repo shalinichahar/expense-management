@@ -1,5 +1,5 @@
 # expense-management
-This application consists of PostgreSQL, Express, React and Node.js. Developed a full-stack web application with CRUD operations.
+This project is an intuitive web application designed to help users effectively track and manage their expenses. It offers a robust platform for users to add, edit, and delete expense records, providing clear and actionable insights into their spending habits through dynamic charts. The application ensures a seamless and user-friendly experience, making it an ideal tool for individuals looking to gain better control over their financial activities.
 
 # Getting Started
   **run :** npm start- for frontend <br />
